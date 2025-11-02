@@ -10,6 +10,16 @@ app.get('/book', (req,res)=>{
     res.json({status:200, message:'success', data:books});
 });
 
+app.get('/book/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const libro = books.find(book => book.id === id);
+    if(libro){
+        res.json({status:200, message:'Libro encontrado', data:libro});
+    }else{
+        res.status(404).json({status:404, message:'Libro no encontrado.'});
+    }
+});
+
 app.post('/book', (req,res)=>{
     const book = req.body;
     books.push(book);
@@ -45,9 +55,9 @@ app.delete('/book/:id', (req,res) =>{
     const filtroLibro = books.filter(book => book.id !== id);
     if(filtroLibro.length !== books.length){
         books = filtroLibro;
-        res.json({status:200, message:'Usuario eliminado correctamente'});
+        res.json({status:200, message:'Libro eliminado correctamente'});
     }else{
-        res.status(404).json({status:404, message:'Usuario no encontrado.'})
+        res.status(404).json({status:404, message:'Libro no encontrado.'})
     }
 });
 

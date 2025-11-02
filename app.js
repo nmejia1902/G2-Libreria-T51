@@ -39,6 +39,16 @@ app.put('/book/:id', (req, res) => {
         libro: books[index]
     });
 });
+
+app.delete('/book/:id', (req,res) =>{
+    const id = parseInt(req.params.id);
+    const filtroLibro = books.filter(book => book.id !== id);
+    if(filtroLibro.length !== books.length){
+        books = filtroLibro;
+        res.json({status:200, message:'Usuario eliminado correctamente'});
+    }
+});
+
 app.listen(PORT, ()=>{
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });

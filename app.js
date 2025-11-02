@@ -46,6 +46,8 @@ app.delete('/book/:id', (req,res) =>{
     if(filtroLibro.length !== books.length){
         books = filtroLibro;
         res.json({status:200, message:'Usuario eliminado correctamente'});
+    }else{
+        res.status(404).json({status:404, message:'Usuario no encontrado.'})
     }
 });
 
